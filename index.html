@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+
+</head>
+<body>
+
+    
+    
+    <script>
+        alert('This is a console game. Please open your dev tools and then go to console!');
+        let humanScore=0;
+        let computerScore=0;
+
+        for(let i=1; i<=5; i++){
+            console.log(`\nRound `+ i +`\n`);
+            playGame();
+        }
+
+        if(humanScore>computerScore) console.log(`\nPlayer Wins!!!`);
+        else if(humanScore<computerScore) console.log(`\nComputer Wins!!!`);
+        else console.log(`\nTie`);
+
+
+        function playGame(){
+            const humanSelection = getHumanChoice();
+            const computerSelection = getComputerChoice();
+            playRound(humanSelection, computerSelection);
+        }    
+
+        function playRound(humanChoice, computerChoice){
+            
+            if (humanChoice === computerChoice) {
+                console.log(`Both chose ${humanChoice}.\nTie!`+ `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+            } else if (
+                (humanChoice === `rock` && computerChoice === `scissors`) ||  // Rock beats Scissors
+                (humanChoice === `paper` && computerChoice === `rock`) ||  // Paper beats Rock
+                (humanChoice === `scissors` && computerChoice === `paper`)      // Scissors beats Paper
+            ) {
+                humanScore+=1;
+                console.log(`Player chose ${humanChoice}.\nComputer chose ${computerChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+
+            } else {
+                computerScore+=1;
+                console.log(`Player chose ${humanChoice}.\nComputer chose ${computerChoice}.\nComputer Wins!`+ `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+            }
+        }
+
+
+        function getHumanChoice(){
+            let userChoice=window.prompt("Rock? Paper? or Scissors?");
+                if (userChoice.toLowerCase()==='rock' || userChoice.toLowerCase()==='paper' || userChoice.toLowerCase()==='scissors'){
+                    return userChoice.toLowerCase();
+                }
+                else {
+                alert("Invalid choice. Please choose Rock, Paper, or Scissors.");
+                return getHumanChoice();
+                }
+            }
+
+        
+        function getComputerChoice(){
+            const choices = ['Rock', 'Paper', 'Scissors'];
+            compChoice=choices[(Math.floor(Math.random() * 3))];
+            return compChoice.toLowerCase();  
+        }
+    </script>
+</body>
+</html>
