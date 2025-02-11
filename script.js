@@ -1,11 +1,14 @@
-alert('This is a console game. Please open your dev tools and then go to console!');
+// alert('This is a console game. Please open your dev tools and then go to console!');
+
+
 let humanScore=0;
 let computerScore=0;
 
-for(let i=1; i<=5; i++){
-    console.log(`\nRound `+ i +`\n`);
-    playGame();
-}
+// for(let i=1; i<=5; i++){
+//     console.log(`\nRound `+ i +`\n`);
+//     playGame();
+// }
+
 
 if(humanScore>computerScore) console.log(`\nPlayer Wins!!!`);
 else if(humanScore<computerScore) console.log(`\nComputer Wins!!!`);
@@ -17,6 +20,8 @@ function playGame(){
     const computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
 }    
+
+
 
 function playRound(humanChoice, computerChoice){
     
@@ -38,7 +43,7 @@ function playRound(humanChoice, computerChoice){
 
 
 function getHumanChoice(){
-    let userChoice=window.prompt("Rock? Paper? or Scissors?");
+    // let userChoice=window.prompt("Rock? Paper? or Scissors?");
         if (userChoice.toLowerCase()==='rock' || userChoice.toLowerCase()==='paper' || userChoice.toLowerCase()==='scissors'){
             return userChoice.toLowerCase();
         }

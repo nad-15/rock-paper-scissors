@@ -1,0 +1,113 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fredoka', sans-serif;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* Bangers  Luckiest Guy Chewy Baloo */
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.main-container {
+    border: 1px solid red;
+    box-sizing: border-box;
+    width: 95vw;
+    aspect-ratio: 1/1;
+    background: lightblue;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+h1 {}
+
+.game-container {
+    /* border: 1px solid blue; */
+    display: flex;
+    width: 100%;
+    height: fit-content;
+
+}
+
+.user-container {
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    aspect-ratio: 1/1;
+    width: 50%;
+    flex-direction: column;
+
+}
+
+
+.list {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid red;
+    box-sizing: border-box;
+    height: 2rem;
+    width: 100%;
+}
+
+.button-container {}
+
+.comp-random-list {}
+
+
+.comp-container {
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    aspect-ratio: 1/1;
+    width: 50%;
+}
+
+.choice-dis {
+    display: flex;
+    font-size: 5rem;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.user-choice-dis {}
+
+.comp-choice-dis {}
+
+
+.score {
+    flex-shrink: 0;
+    font-size: 2rem;
+}
+
+.play-button {
+    text-align: center;
+    height: fit-content;
+    font-size: 2rem;
+    padding: 2px 20px 2px 20px;
+    margin-top: 1.5rem;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}

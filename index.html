@@ -1,18 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
+    <h1>ROCK PAPER SCISSORS!</h1>
+    <div class="main-container">
 
-    
+
+        <!-- round text and winner text You Win You lost -->
+        <h2>Round 1</h2>
+
+        <div class="game-container">
+            <div class="user-container">
+                <!-- score for player -->
+                <div class="score">0</div>
+                <!-- image conatiner for users choice -->
+                <div class="user-choice-dis choice-dis">✊</div>
+                <div class="button-container list">
+                    <button class="userbutton" id="rock">✊</button>
+                    <button class="userbutton" id="paper">🖐️</button>
+                    <button class="userbutton" id="scissors">✌️</button>
+                </div>
+            </div>
 
 
-    
+            <div class="comp-container">
+                <!-- score for computer -->
+                <div class="score">0</div>
+                <!-- image container for computer random choice -->
+                <div class="comp-choice-dis choice-dis">✌️</div>
+                <!-- <div class="comp-random-list list">✊ 🖐️ ✌️</div> -->
+                <div class="button-container list">
+                    <button class="compbutton" id="rock">✊</button>
+                    <button class="compbutton" id="paper">🖐️</button>
+                    <button class="compbutton" id="scissors">✌️</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- play butotn  -->
+        <button class="play-button">Play</button>
+
+        <!-- log container for rounds -->
+        <div class="">
+            <div class="round-1 round">
+
+            </div>
+
+            <div class="round-2">
+
+            </div>
+
+            <div class="round-3">
+
+            </div>
+
+            <div class="round-4">
+
+            </div>
+
+            <div class="round-5">
+
+            </div>
+        </div>
+    </div>
+
+
     <script src="script.js"></script>
 </body>
+
 </html>
