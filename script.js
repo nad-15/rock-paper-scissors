@@ -39,6 +39,7 @@ playButton.addEventListener('click', startRound);
 function resetRound() {
     roundCounter = 1;
     // playButton.textContent = `Play Game`;
+    compRandomList.innerHTML = `?`;
 
     rockButtonUser.classList.add(`disable`);
     paperButtonUser.classList.add(`disable`);
