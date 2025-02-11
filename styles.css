@@ -43,10 +43,14 @@ h2 {
 }
 
 .vs {
+    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    /* height: 100%; */
 }
 
 h5 {
