@@ -12,6 +12,10 @@ const rockButtonComp = document.getElementById(`rockButtonComp`);
 const paperButtonComp = document.getElementById(`paperButtonComp`);
 const scissorsButtonComp = document.getElementById(`scissorsButtonComp`);
 
+const roundCountLable = document.querySelector(`.round-count-label`);
+const roundCount = document.querySelector(`.round-count`);
+const roundsContainer = document.querySelector(`.rounds-container`);
+
 
 const scoreUser = document.querySelector(`.score-user`);
 const scoreComp = document.querySelector(`.score-comp`);
@@ -35,6 +39,13 @@ playButton.addEventListener('click', startRound);
 function resetRound() {
     roundCounter = 1;
     // playButton.textContent = `Play Game`;
+
+    rockButtonUser.classList.add(`disable`);
+    paperButtonUser.classList.add(`disable`);
+    scissorsButtonUser.classList.add(`disable`);
+    playButton.classList.remove(`disable`);
+
+
     humanScore = 0;
     computerScore = 0;
     scoreComp.textContent = 0;
@@ -44,15 +55,26 @@ function resetRound() {
     userChoiceDisplay.style.backgroundColor = ``;
     compChoiceDisplay.style.backgroundColor = '';
     playButton.textContent = `Play Game`;
+    roundIndicator.textContent = ``;
+    roundsContainer.style.display = 'flex';
+    roundIndicator.style.display = 'none';
 }
 
 function startRound() {
 
-    if (roundCounter > 5) {
+    if (roundCounter > Number(roundCount.value)) {
         resetRound();
     } else {
+        rockButtonUser.classList.remove(`disable`);
+        paperButtonUser.classList.remove(`disable`);
+        scissorsButtonUser.classList.remove(`disable`);
+        playButton.classList.add(`disable`);
+
+        
         console.log(`play button click`);
         playButton.textContent = `Next Round`;
+        roundsContainer.style.display = 'none';
+        roundIndicator.style.display = 'flex';
         roundIndicator.textContent = `Round ${roundCounter}`;
         userChoiceDisplay.textContent = `?`;
         userChoiceDisplay.style.backgroundColor = ``;
@@ -166,8 +188,11 @@ rockButtonUser.addEventListener('click', () => {
     userChoiceDisplay.textContent = '✊';
     roundResult();
     roundCounter++;
-
-    if (roundCounter > 5) {
+    rockButtonUser.classList.add(`disable`);
+    paperButtonUser.classList.add(`disable`);
+    scissorsButtonUser.classList.add(`disable`);
+    playButton.classList.remove(`disable`);
+    if (roundCounter > Number(roundCount.value)) {
         showWinner();
     }
 
@@ -181,8 +206,12 @@ paperButtonUser.addEventListener('click', () => {
     userChoiceDisplay.textContent = `🖐️`;
     roundResult();
     roundCounter++;
+    rockButtonUser.classList.add(`disable`);
+    paperButtonUser.classList.add(`disable`);
+    scissorsButtonUser.classList.add(`disable`);
+    playButton.classList.remove(`disable`);
 
-    if (roundCounter > 5) {
+    if (roundCounter > Number(roundCount.value)) {
         showWinner();
     }
 
@@ -194,8 +223,12 @@ scissorsButtonUser.addEventListener('click', () => {
     userChoiceDisplay.textContent = `✌️`;
     roundResult();
     roundCounter++;
+    rockButtonUser.classList.add(`disable`);
+    paperButtonUser.classList.add(`disable`);
+    scissorsButtonUser.classList.add(`disable`);
+    playButton.classList.remove(`disable`);
 
-    if (roundCounter > 5) {
+    if (roundCounter > Number(roundCount.value)) {
         showWinner();
 
     }
@@ -205,11 +238,19 @@ function showWinner() {
     if (humanScore > computerScore) {
         console.log(`\nPlayer Wins!!!`);
         roundIndicator.textContent = `Player Wins!!!`;
+        userChoiceDisplay.style.backgroundColor = '';
+        compChoiceDisplay.style.backgroundColor = '';
+        userChoiceDisplay.textContent = `😂`;
+        compChoiceDisplay.textContent = `😭`;
 
     }
     else if (humanScore < computerScore) {
         console.log(`\nComputer Wins!!!`);
         roundIndicator.textContent = `Computer Wins!!!`;
+        userChoiceDisplay.style.backgroundColor = '';
+        compChoiceDisplay.style.backgroundColor = '';
+        compChoiceDisplay.textContent = `😂`;
+        userChoiceDisplay.textContent = `😭`;
     }
     else {
         console.log(`\nTie`);
@@ -220,6 +261,8 @@ function showWinner() {
 
 
 }
+
+
 
 
 

@@ -15,6 +15,12 @@ body {
     /* Bangers  Luckiest Guy Chewy Baloo */
 }
 
+.disable {
+    user-select: none;  /* Prevent text selection */
+    pointer-events: none;  /* Disable clicking and interactions */
+    opacity: 0.5;  /* Make it look disabled */
+}
+
 h1 {
     width: 100%;
     text-align: center;
@@ -22,9 +28,48 @@ h1 {
 
 h2 {
     display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
+    /* margin: 0; */
+    margin-right: 10px;
+    font-size: 2rem;
+    padding: .5rem;
+}
 
+.vs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+h5 {
+    margin: 0;
+
+}
+
+.round-count {
+    width: 3rem;
+    height: 1.5rem;
+    padding: 2px;
+    outline: none;
+    font-family: inherit; 
+    font-size: inherit; 
+    text-align: center;
+
+}
+
+.rounds-container {
+    /* border: 2px solid red; */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.5em;
 }
 
 .main-container {
@@ -138,4 +183,61 @@ h1 {}
     font-family: 'Fredoka', sans-serif;
     margin-bottom: 1.5rem;
     border-radius: 8px;
+}
+
+@media (min-width: 1024px) {
+    .main-container {
+        width: 60vh;
+        aspect-ratio: 1/1;
+        padding: 0 20px;
+    }
+
+
+
+    .round-count {
+        width: 5rem;
+        height: 3rem;
+        font-size: 2rem;
+    }
+
+    .game-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .choice-dis {
+        font-size: 10rem;
+    }
+
+    .score {
+        font-size: 4rem;
+    }
+
+    .play-button {
+        font-size: 3rem;
+        padding: 2px 15px;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    h5 {
+        font-size: 2rem;
+    }
+
+    .list {
+
+        height: 3rem;
+        width: 100%;
+        font-size: 2rem;
+    }
+
+    .userbutton {
+        font-size: 2rem;
+    }
 }

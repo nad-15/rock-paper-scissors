@@ -16,8 +16,11 @@
 
 
         <!-- round text and winner text You Win You lost -->
-        <h2 id="round-indicator">Round 1</h2>
-
+        <h2 id="round-indicator"></h2>
+        <div class="rounds-container">
+            <h5 id="round-count-label">Enter number of Rounds: </h5>
+            <input type="number" class="round-count" value="5">
+        </div>
         <div class="game-container">
             <div class="user-container">
                 <!-- score for player -->
@@ -25,12 +28,12 @@
                 <!-- image conatiner for users choice -->
                 <div class="user-choice-dis choice-dis">?</div>
                 <div class="button-container list">
-                    <button class="userbutton" id="rockButtonUser">✊</button>
-                    <button class="userbutton" id="paperButtonUser">🖐️</button>
-                    <button class="userbutton" id="scissorsButtonUser">✌️</button>
+                    <button class="userbutton disable" id="rockButtonUser">✊</button>
+                    <button class="userbutton disable" id="paperButtonUser">🖐️</button>
+                    <button class="userbutton disable" id="scissorsButtonUser">✌️</button>
                 </div>
             </div>
-                <h2>vs</h2>
+            <div class="vs">vs</div>
             <div class="comp-container">
                 <!-- score for computer -->
                 <div class="score-comp score">0</div>
