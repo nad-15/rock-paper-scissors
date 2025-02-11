@@ -87,7 +87,7 @@ function startRound() {
 
 
 
-if (humanScore > computerScore) console.log(`\nPlayer Wins!!!`);
+if (humanScore > computerScore) console.log(`\nYou Win!!!`);
 else if (humanScore < computerScore) console.log(`\nComputer Wins!!!`);
 else console.log(`\nTie`);
 
@@ -237,8 +237,8 @@ scissorsButtonUser.addEventListener('click', () => {
 
 function showWinner() {
     if (humanScore > computerScore) {
-        console.log(`\nPlayer Wins!!!`);
-        roundIndicator.textContent = `Player Wins!!!`;
+        console.log(`\nYou Win!!!`);
+        roundIndicator.textContent = `You Win!!!`;
         userChoiceDisplay.style.backgroundColor = '';
         compChoiceDisplay.style.backgroundColor = '';
         userChoiceDisplay.textContent = `😂`;
