@@ -76,7 +76,7 @@ function startRound() {
         playButton.textContent = `Next Round`;
         roundsContainer.style.display = 'none';
         roundIndicator.style.display = 'flex';
-        roundIndicator.textContent = `Round ${roundCounter}`;
+        roundIndicator.textContent = `Round ${roundCounter} of ${roundCount.value}`;
         userChoiceDisplay.textContent = `?`;
         userChoiceDisplay.style.backgroundColor = ``;
         compChoiceDisplay.style.backgroundColor = '';
