@@ -20,6 +20,13 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .main-container {
     border: 1px solid red;
     box-sizing: border-box;
@@ -31,6 +38,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 10px 0 10px;
 }
 
 
@@ -40,27 +48,32 @@ h1 {}
     /* border: 1px solid blue; */
     display: flex;
     width: 100%;
+    justify-content: space-between;
     height: fit-content;
+    /* gap: 50px; */
+    margin-left:25px ;
+    margin-right: 25px;
 
 }
 
 .user-container {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     display: flex;
     justify-content: center;
     align-items: center;
 
     aspect-ratio: 1/1;
-    width: 50%;
+    width: 40%;
     flex-direction: column;
 
 }
 
 
 .list {
+    margin-top: 1rem;
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     box-sizing: border-box;
     height: 2rem;
     width: 100%;
@@ -68,17 +81,32 @@ h1 {}
 
 .button-container {}
 
-.comp-random-list {}
+.comp-random-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    overflow: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+}
+
+.comp-random-list span {
+    display: inline-block; 
+    /* font-size: 2rem;  */
+    margin-right: 5px; 
+}
 
 
 .comp-container {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     aspect-ratio: 1/1;
-    width: 50%;
+    width: 40%;
 }
 
 .choice-dis {

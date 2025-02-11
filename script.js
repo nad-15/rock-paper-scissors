@@ -1,61 +1,225 @@
 // alert('This is a console game. Please open your dev tools and then go to console!');
+const roundIndicator = document.getElementById(`round-indicator`);
+
+const userChoiceDisplay = document.querySelector(`.user-choice-dis`);
+const rockButtonUser = document.getElementById(`rockButtonUser`);
+const paperButtonUser = document.getElementById(`paperButtonUser`);
+const scissorsButtonUser = document.getElementById(`scissorsButtonUser`);
+
+const compChoiceDisplay = document.querySelector(`.comp-choice-dis`);
+const compRandomList = document.querySelector(`.comp-random-list`);
+const rockButtonComp = document.getElementById(`rockButtonComp`);
+const paperButtonComp = document.getElementById(`paperButtonComp`);
+const scissorsButtonComp = document.getElementById(`scissorsButtonComp`);
 
 
-let humanScore=0;
-let computerScore=0;
-
-// for(let i=1; i<=5; i++){
-//     console.log(`\nRound `+ i +`\n`);
-//     playGame();
-// }
+const scoreUser = document.querySelector(`.score-user`);
+const scoreComp = document.querySelector(`.score-comp`);
 
 
-if(humanScore>computerScore) console.log(`\nPlayer Wins!!!`);
-else if(humanScore<computerScore) console.log(`\nComputer Wins!!!`);
+const playButton = document.querySelector(`.play-button`);
+
+
+let interval;
+let compChoice;
+let userChoice;
+let roundCounter = 1;
+
+
+
+let humanScore = 0;
+let computerScore = 0;
+
+playButton.addEventListener('click', startRound);
+
+function resetRound() {
+    roundCounter = 1;
+    // playButton.textContent = `Play Game`;
+    humanScore = 0;
+    computerScore = 0;
+    scoreComp.textContent = 0;
+    scoreUser.textContent = 0;
+    userChoiceDisplay.textContent = `?`;
+    compChoiceDisplay.textContent = `?`;
+    userChoiceDisplay.style.backgroundColor = ``;
+    compChoiceDisplay.style.backgroundColor = '';
+    playButton.textContent = `Play Game`;
+}
+
+function startRound() {
+
+    if (roundCounter > 5) {
+        resetRound();
+    } else {
+        console.log(`play button click`);
+        playButton.textContent = `Next Round`;
+        roundIndicator.textContent = `Round ${roundCounter}`;
+        userChoiceDisplay.textContent = `?`;
+        userChoiceDisplay.style.backgroundColor = ``;
+        compChoiceDisplay.style.backgroundColor = '';
+        startRandomCompChoice();
+    }
+}
+
+
+
+
+if (humanScore > computerScore) console.log(`\nPlayer Wins!!!`);
+else if (humanScore < computerScore) console.log(`\nComputer Wins!!!`);
 else console.log(`\nTie`);
 
 
-function playGame(){
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
-}    
+// function playGame(){
+//     const humanSelection = getuserChoice();
+//     const computerSelection = getcompChoice();
+//     playRound(humanSelection, computerSelection);
+// }    
 
 
 
-function playRound(humanChoice, computerChoice){
-    
-    if (humanChoice === computerChoice) {
-        console.log(`Both chose ${humanChoice}.\nTie!`+ `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+function roundResult() {
+
+    if (userChoice === compChoice) {
+        console.log(`Both chose ${userChoice}.\nTie!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+        userChoiceDisplay.style.backgroundColor = `#a3c4f3`;
+        compChoiceDisplay.style.backgroundColor = '#a3c4f3';
+
     } else if (
-        (humanChoice === `rock` && computerChoice === `scissors`) ||  // Rock beats Scissors
-        (humanChoice === `paper` && computerChoice === `rock`) ||  // Paper beats Rock
-        (humanChoice === `scissors` && computerChoice === `paper`)      // Scissors beats Paper
+        (userChoice === `rock` && compChoice === `scissors`) ||  // Rock beats Scissors
+        (userChoice === `paper` && compChoice === `rock`) ||  // Paper beats Rock
+        (userChoice === `scissors` && compChoice === `paper`)      // Scissors beats Paper
     ) {
-        humanScore+=1;
-        console.log(`Player chose ${humanChoice}.\nComputer chose ${computerChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+        humanScore += 1;
+        scoreUser.textContent = humanScore;
+
+        userChoiceDisplay.style.backgroundColor = `#a7d7a7`;
+        compChoiceDisplay.style.backgroundColor = '#f4a3a3';
+        console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+
 
     } else {
-        computerScore+=1;
-        console.log(`Player chose ${humanChoice}.\nComputer chose ${computerChoice}.\nComputer Wins!`+ `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+        computerScore += 1;
+        scoreComp.textContent = computerScore;
+        userChoiceDisplay.style.backgroundColor = `#f4a3a3`;
+        compChoiceDisplay.style.backgroundColor = '#a7d7a7';
+        console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nComputer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
     }
 }
 
 
-function getHumanChoice(){
-    // let userChoice=window.prompt("Rock? Paper? or Scissors?");
-        if (userChoice.toLowerCase()==='rock' || userChoice.toLowerCase()==='paper' || userChoice.toLowerCase()==='scissors'){
-            return userChoice.toLowerCase();
-        }
-        else {
-        alert("Invalid choice. Please choose Rock, Paper, or Scissors.");
-        return getHumanChoice();
-        }
+// function getuserChoice(){
+//     // let userChoice=window.prompt("Rock? Paper? or Scissors?");
+//         if (userChoice.toLowerCase()==='rock' || userChoice.toLowerCase()==='paper' || userChoice.toLowerCase()==='scissors'){
+//             return userChoice.toLowerCase();
+//         }
+//         else {
+//         alert("Invalid choice. Please choose Rock, Paper, or Scissors.");
+//         return getuserChoice();
+//         }
+//     }
+
+
+function getcompChoice() {
+    const choices = ['rock', 'paper', 'scissors'];
+    compChoice = choices[(Math.floor(Math.random() * 3))];
+    if (compChoice === `rock`) {
+        // rockButtonComp.style.border = `2px solid blue`;
+        // paperButtonComp.style.border = `1px solid black`;
+        // scissorsButtonComp.style.border = `1px solid black`;
+        // compRandomList.textContent+= '✊';
+        compRandomList.innerHTML += '<span>✊</span>';
+        compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
+
+        return '✊';
+    } else if (compChoice === `paper`) {
+        // rockButtonComp.style.border = `1px solid black`;
+        // paperButtonComp.style.border = `2px solid blue`;
+        // scissorsButtonComp.style.border = `1px solid black`;
+        // compRandomList.textContent+= '🖐️';
+        compRandomList.innerHTML += '<span>🖐️</span>';
+        compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
+
+        return `🖐️`;
+    } else if (compChoice === `scissors`) {
+        // rockButtonComp.style.border = `1px solid black`;
+        // paperButtonComp.style.border = `1px solid black`;
+        // scissorsButtonComp.style.border = `2px solid blue`;
+        // compRandomList.textContent+= '✌️';
+        compRandomList.innerHTML += '<span>✌️</span>';
+        compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
+
+        return `✌️`;
+    }
+    // return compChoice.toLowerCase();  
+}
+
+function startRandomCompChoice() {
+    interval = setInterval(() => {
+        compChoiceDisplay.textContent = getcompChoice();
+    }, 20); // let user choose speed
+
+}
+
+rockButtonUser.addEventListener('click', () => {
+    clearInterval(interval);
+    userChoice = `rock`;
+    userChoiceDisplay.textContent = '✊';
+    roundResult();
+    roundCounter++;
+
+    if (roundCounter > 5) {
+        showWinner();
     }
 
 
-function getComputerChoice(){
-    const choices = ['Rock', 'Paper', 'Scissors'];
-    compChoice=choices[(Math.floor(Math.random() * 3))];
-    return compChoice.toLowerCase();  
+});
+
+
+paperButtonUser.addEventListener('click', () => {
+    clearInterval(interval);
+    userChoice = `paper`;
+    userChoiceDisplay.textContent = `🖐️`;
+    roundResult();
+    roundCounter++;
+
+    if (roundCounter > 5) {
+        showWinner();
+    }
+
+});
+
+scissorsButtonUser.addEventListener('click', () => {
+    clearInterval(interval);
+    userChoice = `scissors`;
+    userChoiceDisplay.textContent = `✌️`;
+    roundResult();
+    roundCounter++;
+
+    if (roundCounter > 5) {
+        showWinner();
+
+    }
+});
+
+function showWinner() {
+    if (humanScore > computerScore) {
+        console.log(`\nPlayer Wins!!!`);
+        roundIndicator.textContent = `Player Wins!!!`;
+
+    }
+    else if (humanScore < computerScore) {
+        console.log(`\nComputer Wins!!!`);
+        roundIndicator.textContent = `Computer Wins!!!`;
+    }
+    else {
+        console.log(`\nTie`);
+        roundIndicator.textContent = `It is a Tie!!!`;
+    }
+
+    playButton.textContent = `Reset`;
+
+
 }
+
+
+
