@@ -270,7 +270,7 @@ function getcompChoice() {
         // scissorsButtonComp.style.border = `1px solid black`;
         // compRandomList.textContent+= '✊';
         compRandomList.innerHTML += '<span class="comp-span">✊</span>';
-        console.log(compRandomList);
+        // console.log(compRandomList);
         compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
 
         return '✊';

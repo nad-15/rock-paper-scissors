@@ -280,7 +280,20 @@ transform: scale(.8) ;
 
 }
 
+
+.list {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    height: 2rem;
+    width: 100%;
+    
+}
+
 .comp-random-list {
+    height: 2rem;
     margin-top: 1rem;
     width: 100%;
     display: flex;
