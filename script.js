@@ -23,6 +23,11 @@ const scoreComp = document.querySelector(`.score-comp`);
 
 const playButton = document.querySelector(`.play-button`);
 
+const stopButton = document.querySelector(`.button-stop`);
+
+const roundHistory = document.querySelector(`.round-history`);
+
+
 
 let interval;
 let compChoice;
@@ -34,7 +39,25 @@ let roundCounter = 1;
 let humanScore = 0;
 let computerScore = 0;
 
-playButton.addEventListener('click', startRound);
+playButton.addEventListener('click', () => {
+
+    if(Number(roundCount.value) > 1000 || Number(roundCount.value)<1){
+alert(`Invalid Input!! Min Round: 1 Max round: 1000`);
+return;
+    }
+
+    roundHistory.style.display = 'flex';
+    stopButton.style.display = 'flex'
+    startRound();
+});
+
+stopButton.addEventListener(`click`, ()=>{
+    clearInterval(interval);
+    resetRound();
+});
+
+
+
 
 function resetRound() {
     roundCounter = 1;
@@ -59,11 +82,20 @@ function resetRound() {
     roundIndicator.textContent = ``;
     roundsContainer.style.display = 'flex';
     roundIndicator.style.display = 'none';
+
+
+    while (roundHistory.children.length > 1) {
+        roundHistory.removeChild(roundHistory.lastChild);
+    }
+
+    roundHistory.style.display = 'none';
+    stopButton.style.display = 'none'
 }
 
 function startRound() {
 
     if (roundCounter > Number(roundCount.value)) {
+
         resetRound();
     } else {
         rockButtonUser.classList.remove(`disable`);
@@ -71,12 +103,12 @@ function startRound() {
         scissorsButtonUser.classList.remove(`disable`);
         playButton.classList.add(`disable`);
 
-        
+
         console.log(`play button click`);
         playButton.textContent = `Next Round`;
         roundsContainer.style.display = 'none';
         roundIndicator.style.display = 'flex';
-        roundIndicator.textContent = `Round ${roundCounter} of ${roundCount.value}`;
+        roundIndicator.textContent = `Round ${roundCounter} of ${parseInt(roundCount.value)}`;
         userChoiceDisplay.textContent = `?`;
         userChoiceDisplay.style.backgroundColor = ``;
         compChoiceDisplay.style.backgroundColor = '';
@@ -87,9 +119,9 @@ function startRound() {
 
 
 
-if (humanScore > computerScore) console.log(`\nYou Win!!!`);
-else if (humanScore < computerScore) console.log(`\nComputer Wins!!!`);
-else console.log(`\nTie`);
+// if (humanScore > computerScore) console.log(`\nYou Win!!!`);
+// else if (humanScore < computerScore) console.log(`\nComputer Wins!!!`);
+// else console.log(`\nTie`);
 
 
 // function playGame(){
@@ -107,6 +139,8 @@ function roundResult() {
         userChoiceDisplay.style.backgroundColor = `#a3c4f3`;
         compChoiceDisplay.style.backgroundColor = '#a3c4f3';
 
+        getRoundHistory();
+
     } else if (
         (userChoice === `rock` && compChoice === `scissors`) ||  // Rock beats Scissors
         (userChoice === `paper` && compChoice === `rock`) ||  // Paper beats Rock
@@ -117,7 +151,9 @@ function roundResult() {
 
         userChoiceDisplay.style.backgroundColor = `#a7d7a7`;
         compChoiceDisplay.style.backgroundColor = '#f4a3a3';
-        console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+
+        getRoundHistory();
+        // console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
 
 
     } else {
@@ -125,7 +161,9 @@ function roundResult() {
         scoreComp.textContent = computerScore;
         userChoiceDisplay.style.backgroundColor = `#f4a3a3`;
         compChoiceDisplay.style.backgroundColor = '#a7d7a7';
-        console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nComputer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
+
+        getRoundHistory();
+        // console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nComputer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
     }
 }
 
@@ -206,6 +244,8 @@ paperButtonUser.addEventListener('click', () => {
     userChoice = `paper`;
     userChoiceDisplay.textContent = `🖐️`;
     roundResult();
+
+
     roundCounter++;
     rockButtonUser.classList.add(`disable`);
     paperButtonUser.classList.add(`disable`);
@@ -230,6 +270,7 @@ scissorsButtonUser.addEventListener('click', () => {
     playButton.classList.remove(`disable`);
 
     if (roundCounter > Number(roundCount.value)) {
+        stopButton.style.display = 'none'
         showWinner();
 
     }
@@ -264,6 +305,35 @@ function showWinner() {
 }
 
 
+function getRoundHistory() {
+
+
+    const roundNumber = document.createElement(`div`);
+    roundNumber.classList.add(`round-number`);
+    const userChoiceHistory = document.createElement('div');
+    const compChoiceHistory = document.createElement(`div`);
+
+    roundNumber.textContent = `${roundCounter}`;
+    userChoiceHistory.textContent = userChoiceDisplay.textContent;
+    compChoiceHistory.textContent = compChoiceDisplay.textContent;
+    userChoiceHistory.style.backgroundColor = window.getComputedStyle(userChoiceDisplay).backgroundColor;
+    compChoiceHistory.style.backgroundColor = window.getComputedStyle(compChoiceDisplay).backgroundColor;
+
+
+
+    const roundResultHistory = document.createElement(`div`);
+    roundResultHistory.classList.add(`round-result-history`);
+
+    roundResultHistory.appendChild(roundNumber);
+    roundResultHistory.appendChild(userChoiceHistory);
+    roundResultHistory.appendChild(compChoiceHistory);
+
+
+    roundHistory.appendChild(roundResultHistory);
+    roundHistory.scrollLeft = roundHistory.scrollWidth;
+
+
+}
 
 
 

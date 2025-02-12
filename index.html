@@ -20,6 +20,7 @@
         <div class="rounds-container">
             <h5 id="round-count-label">Enter number of Rounds: </h5>
             <input type="number" class="round-count" value="5">
+
         </div>
         <div class="game-container">
             <div class="user-container">
@@ -28,10 +29,14 @@
                 <div class="score-user score">0</div>
                 <!-- image conatiner for users choice -->
                 <div class="user-choice-dis choice-dis">?</div>
+
                 <div class="button-container list">
                     <button class="userbutton disable" id="rockButtonUser">✊</button>
                     <button class="userbutton disable" id="paperButtonUser">🖐️</button>
                     <button class="userbutton disable" id="scissorsButtonUser">✌️</button>
+                </div>
+                <div id="choose-wisely">
+                    <div id="choose-wisely-text">Choose Wisely!</div>
                 </div>
                 <div class="player">You</div>
             </div>
@@ -43,40 +48,40 @@
                 <!-- image container for computer random choice -->
                 <div class="comp-choice-dis choice-dis">?</div>
                 <div class="comp-random-list list">?</div>
+                <div id="speedControlContainer">
+                    <div></div>
+                    <div id="decreaseSpeed">⬅️</div>
+                    <div id="intervalDisplay">20 ms</div>
+                    <div id="increaseSpeed">➡️</div>
+                    <div id="resetSpeed">🔄 Reset</div>
+                </div>
                 <!-- <div class="button-container list">
                     <button class="compbutton" id="rockButtonComp">✊</button>
                     <button class="compbutton" id="paperButtonComp">🖐️</button>
                     <button class="compbutton" id="scissorsButtonComp">✌️</button>
                 </div> -->
+
                 <div class="player">Computer</div>
+                
+
+                
             </div>
 
         </div>
         <!-- play butotn  -->
-        <button class="play-button">Play Game</button>
+        <button class="play-button button-controls">Play Game</button>
 
         <!-- log container for rounds -->
-        <div class="">
-            <div class="round-1 round">
-
+        <div class="round-history">
+            <div class="players-name">
+                <div class="round-text table">Round: </div>
+                <div class="player-name table">You: </div>
+                <div class="computer-name table">Comp: </div>
             </div>
-
-            <div class="round-2">
-
-            </div>
-
-            <div class="round-3">
-
-            </div>
-
-            <div class="round-4">
-
-            </div>
-
-            <div class="round-5">
-
-            </div>
+            <!-- insert history resutl here -->
         </div>
+
+        <button class="button-controls button-stop">Stop Game</button>
     </div>
 
 

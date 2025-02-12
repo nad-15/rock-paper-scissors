@@ -15,6 +15,47 @@ body {
     /* Bangers  Luckiest Guy Chewy Baloo */
 }
 
+
+.round-history {
+    background-color: white;
+    border: 1px solid black;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    height: 4rem;
+    width: 100%;
+    gap: 5px;
+    /* border: 2px solid red; */
+    display: flex;
+    display: none;
+    align-self: flex-start;
+    overflow: auto;
+    /* gap: 2px; */
+    scrollbar-width: none;
+}
+
+.round-number {
+    text-align: center;
+}
+
+.players-name {
+    display: flex;
+    text-align: end;
+    align-self: flex-end;
+    flex-direction: column;
+}
+
+.round-text {
+    padding-bottom: 5px;
+}
+
+
+.round-result {
+    display: flex;
+    text-align: end;
+    align-self: flex-end;
+    flex-direction: column;
+}
+
 .player {
 
     font-weight: bold;
@@ -63,13 +104,14 @@ h5 {
 }
 
 .round-count {
-    width: 2rem;
+    width: 5rem;
     height: 1.5rem;
     padding: 2px;
     outline: none;
     font-family: inherit;
     font-size: inherit;
     text-align: center;
+    border-radius: 8px;
 
 }
 
@@ -86,7 +128,7 @@ h5 {
 }
 
 .main-container {
-    border: 1px solid red;
+    border: 1px solid black;
     box-sizing: border-box;
     width: 95vw;
     aspect-ratio: 1/1;
@@ -114,6 +156,14 @@ h1 {}
 
 }
 
+#speedControlContainer, #choose-wisely {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+
+}
+
 .user-container {
     /* border: 1px solid green; */
     display: flex;
@@ -127,6 +177,11 @@ h1 {}
 }
 .userbutton {
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#resetSpeed {
+    /* margin-left: 15px; */
 }
 
 
@@ -199,9 +254,30 @@ h1 {}
     font-family: 'Fredoka', sans-serif;
     margin-bottom: 1.5rem;
     border-radius: 8px;
+    cursor: pointer;
 }
 
+.button-stop {
+    display: none;
+    text-align: center;
+    height: fit-content;
+    font-size: 2rem;
+    padding: 2px 20px 2px 20px;
+    font-family: 'Fredoka', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+
+
+
 @media (min-width: 1024px) {
+
+
+    .round-history {
+        scrollbar-width: 10px ;
+    }
     .main-container {
         width: 30vw;
         padding: 0 20px;
