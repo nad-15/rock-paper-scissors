@@ -20,10 +20,14 @@ body {
     font-weight: bold;
     margin-top: 1rem;
 }
+
 .disable {
-    user-select: none;  /* Prevent text selection */
-    pointer-events: none;  /* Disable clicking and interactions */
-    opacity: 0.5;  /* Make it look disabled */
+    user-select: none;
+    /* Prevent text selection */
+    pointer-events: none;
+    /* Disable clicking and interactions */
+    opacity: 0.5;
+    /* Make it look disabled */
 }
 
 h1 {
@@ -47,7 +51,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
     font-style: italic;
     /* height: 100%; */
@@ -59,12 +63,12 @@ h5 {
 }
 
 .round-count {
-    width: 3rem;
+    width: 2rem;
     height: 1.5rem;
     padding: 2px;
     outline: none;
-    font-family: inherit; 
-    font-size: inherit; 
+    font-family: inherit;
+    font-size: inherit;
     text-align: center;
 
 }
@@ -105,7 +109,7 @@ h1 {}
     justify-content: space-between;
     height: fit-content;
     /* gap: 50px; */
-    margin-left:25px ;
+    margin-left: 25px;
     margin-right: 25px;
 
 }
@@ -120,6 +124,9 @@ h1 {}
     width: 40%;
     flex-direction: column;
 
+}
+.userbutton {
+    font-size: 1.2rem;
 }
 
 
@@ -147,9 +154,9 @@ h1 {}
 }
 
 .comp-random-list span {
-    display: inline-block; 
+    display: inline-block;
     /* font-size: 2rem;  */
-    margin-right: 5px; 
+    margin-right: 5px;
 }
 
 
@@ -196,16 +203,15 @@ h1 {}
 
 @media (min-width: 1024px) {
     .main-container {
-        width: 60vh;
-        aspect-ratio: 1/1;
+        width: 30vw;
         padding: 0 20px;
     }
 
 
 
     .round-count {
-        width: 5rem;
-        height: 3rem;
+        width: 2rem;
+        height: 2rem;
         font-size: 2rem;
     }
 
@@ -215,24 +221,24 @@ h1 {}
     }
 
     .choice-dis {
-        font-size: 10rem;
+        font-size: 7rem;
     }
 
     .score {
-        font-size: 4rem;
+        font-size: 2rem;
     }
 
     .play-button {
-        font-size: 3rem;
+        font-size: 2rem;
         padding: 2px 15px;
     }
 
     h1 {
-        font-size: 4rem;
+        font-size: 2rem;
     }
 
     h2 {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     h5 {
@@ -241,12 +247,24 @@ h1 {}
 
     .list {
 
-        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
         width: 100%;
-        font-size: 2rem;
+        font-size: 1.5rem;
+
+
+    }
+
+    .comp-random-list {
+        padding: 1rem;
+        /* background-color: red; */
     }
 
     .userbutton {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        width: fit-content;
+        height: fit-content;
     }
 }
