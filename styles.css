@@ -72,6 +72,7 @@ body {
 }
 
 h1 {
+    margin-top: 0;
     width: 100%;
     text-align: center;
 }
@@ -160,7 +161,8 @@ h1 {}
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    /* font-size: 18px; */
+    height: 18px;
 
 }
 
@@ -180,10 +182,6 @@ h1 {}
     cursor: pointer;
 }
 
-#resetSpeed {
-    /* margin-left: 15px; */
-}
-
 
 .list {
     margin-top: 1rem;
@@ -195,14 +193,45 @@ h1 {}
     width: 100%;
 }
 
-.button-container {}
+#resetSpeed {
+    font-size: 18px;
+}
+
+.comp-span {
+    border: 1px solid gray;
+    background-color: white;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+/* Click effect */
+.button-controls:active {
+    /* background: rgba(0, 0, 0, 0.2); */
+    transform: scale(0.9);
+}
+
+.material-icons {
+    user-select: none;
+    
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    /* height: 15px; */
+    /* font-size: 14px; */
+    /* background-color: red; */
+}
+.material-icons:active {
+    transform: scale(0.8);
+
+}
 
 .comp-random-list {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid gray;
+    border-radius: 2px;
     overflow: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
@@ -261,7 +290,7 @@ h1 {}
     display: none;
     text-align: center;
     height: fit-content;
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding: 2px 20px 2px 20px;
     font-family: 'Fredoka', sans-serif;
     border-radius: 8px;
@@ -324,7 +353,7 @@ h1 {}
     .list {
 
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         height: 2rem;
         width: 100%;

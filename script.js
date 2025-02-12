@@ -16,6 +16,8 @@ const roundCountLable = document.querySelector(`.round-count-label`);
 const roundCount = document.querySelector(`.round-count`);
 const roundsContainer = document.querySelector(`.rounds-container`);
 
+const speedControlContainer = document.getElementById(`speedControlContainer`);
+
 
 const scoreUser = document.querySelector(`.score-user`);
 const scoreComp = document.querySelector(`.score-comp`);
@@ -26,6 +28,45 @@ const playButton = document.querySelector(`.play-button`);
 const stopButton = document.querySelector(`.button-stop`);
 
 const roundHistory = document.querySelector(`.round-history`);
+
+
+let compSpeed = 100; //ms
+const baseSpeed = 100; 
+const speedDisplay = document.getElementById("intervalDisplay");
+
+document.getElementById("increaseSpeed").addEventListener("click", () => {
+    if (compSpeed > 100) {
+        compSpeed = Math.max(10, compSpeed - 100); // Limit to 10ms minimum
+    } else {
+        compSpeed = Math.max(10, compSpeed - 10);
+    }
+
+    updateSpeedDisplay();
+    console.log(`Speed: ${compSpeed}ms`);
+});
+
+document.getElementById("decreaseSpeed").addEventListener("click", () => {
+    if (compSpeed >= 100) {
+        compSpeed = Math.min(1000, compSpeed + 100); // Limit to 1000ms maximum
+    } else {
+        compSpeed = Math.min(1000, compSpeed + 10);
+    }
+
+    updateSpeedDisplay();
+    console.log(`Speed: ${compSpeed}ms`);
+});
+
+document.getElementById("resetSpeed").addEventListener("click", () => {
+    compSpeed = 100; 
+    updateSpeedDisplay();
+    console.log(`Speed reset: ${compSpeed}ms`);
+});
+
+function updateSpeedDisplay() {
+    let speedPercentage = baseSpeed / compSpeed; 
+    speedDisplay.textContent = `x ${speedPercentage.toFixed(2)}`;
+}
+
 
 
 
@@ -41,9 +82,9 @@ let computerScore = 0;
 
 playButton.addEventListener('click', () => {
 
-    if(Number(roundCount.value) > 1000 || Number(roundCount.value)<1){
-alert(`Invalid Input!! Min Round: 1 Max round: 1000`);
-return;
+    if (Number(roundCount.value) > 1000 || Number(roundCount.value) < 1) {
+        alert(`Invalid Input!! Min Round: 1 Max round: 1000`);
+        return;
     }
 
     roundHistory.style.display = 'flex';
@@ -51,7 +92,7 @@ return;
     startRound();
 });
 
-stopButton.addEventListener(`click`, ()=>{
+stopButton.addEventListener(`click`, () => {
     clearInterval(interval);
     resetRound();
 });
@@ -68,6 +109,7 @@ function resetRound() {
     paperButtonUser.classList.add(`disable`);
     scissorsButtonUser.classList.add(`disable`);
     playButton.classList.remove(`disable`);
+    speedControlContainer.classList.remove(`disable`);
 
 
     humanScore = 0;
@@ -102,6 +144,7 @@ function startRound() {
         paperButtonUser.classList.remove(`disable`);
         scissorsButtonUser.classList.remove(`disable`);
         playButton.classList.add(`disable`);
+        speedControlContainer.classList.add(`disable`);
 
 
         console.log(`play button click`);
@@ -188,7 +231,7 @@ function getcompChoice() {
         // paperButtonComp.style.border = `1px solid black`;
         // scissorsButtonComp.style.border = `1px solid black`;
         // compRandomList.textContent+= '✊';
-        compRandomList.innerHTML += '<span>✊</span>';
+        compRandomList.innerHTML += '<span class="comp-span">✊</span>';
         compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
 
         return '✊';
@@ -197,7 +240,7 @@ function getcompChoice() {
         // paperButtonComp.style.border = `2px solid blue`;
         // scissorsButtonComp.style.border = `1px solid black`;
         // compRandomList.textContent+= '🖐️';
-        compRandomList.innerHTML += '<span>🖐️</span>';
+        compRandomList.innerHTML += '<span class="comp-span">🖐️</span>';
         compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
 
         return `🖐️`;
@@ -206,7 +249,7 @@ function getcompChoice() {
         // paperButtonComp.style.border = `1px solid black`;
         // scissorsButtonComp.style.border = `2px solid blue`;
         // compRandomList.textContent+= '✌️';
-        compRandomList.innerHTML += '<span>✌️</span>';
+        compRandomList.innerHTML += '<span class="comp-span">✌️</span>';
         compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
 
         return `✌️`;
@@ -217,7 +260,7 @@ function getcompChoice() {
 function startRandomCompChoice() {
     interval = setInterval(() => {
         compChoiceDisplay.textContent = getcompChoice();
-    }, 20); // let user choose speed
+    }, compSpeed); // let user choose speed
 
 }
 
@@ -231,6 +274,7 @@ rockButtonUser.addEventListener('click', () => {
     paperButtonUser.classList.add(`disable`);
     scissorsButtonUser.classList.add(`disable`);
     playButton.classList.remove(`disable`);
+    speedControlContainer.classList.remove(`disable`);
     if (roundCounter > Number(roundCount.value)) {
         showWinner();
     }
@@ -251,6 +295,7 @@ paperButtonUser.addEventListener('click', () => {
     paperButtonUser.classList.add(`disable`);
     scissorsButtonUser.classList.add(`disable`);
     playButton.classList.remove(`disable`);
+    speedControlContainer.classList.remove(`disable`);
 
     if (roundCounter > Number(roundCount.value)) {
         showWinner();
@@ -268,6 +313,7 @@ scissorsButtonUser.addEventListener('click', () => {
     paperButtonUser.classList.add(`disable`);
     scissorsButtonUser.classList.add(`disable`);
     playButton.classList.remove(`disable`);
+    speedControlContainer.classList.remove(`disable`);
 
     if (roundCounter > Number(roundCount.value)) {
         stopButton.style.display = 'none'
@@ -334,6 +380,7 @@ function getRoundHistory() {
 
 
 }
+
 
 
 
