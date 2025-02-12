@@ -5,7 +5,7 @@ This is a simple Rock-Paper-Scissors game built using HTML, CSS, and JavaScript.
 
 ## Features
 - Interactive UI with buttons for player selection.
-- Randomized computer choice.
+- Randomized computer choice with adjustable speed set by the user.
 - Real-time result display.
 - Basic animations and styling.
 
