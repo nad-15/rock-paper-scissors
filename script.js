@@ -18,6 +18,7 @@ const roundsContainer = document.querySelector(`.rounds-container`);
 
 const speedControlContainer = document.getElementById(`speedControlContainer`);
 
+console.log(compRandomList);
 
 const scoreUser = document.querySelector(`.score-user`);
 const scoreComp = document.querySelector(`.score-comp`);
@@ -123,7 +124,7 @@ playButton.addEventListener('click', () => {
         alert(`Invalid Input!! Min Round: 1 Max round: 1000`);
         return;
     }
-
+    compRandomList.innerHTML = ``;
     roundHistory.style.display = 'flex';
     stopButton.style.display = 'flex'
     startRound();
@@ -140,7 +141,7 @@ stopButton.addEventListener(`click`, () => {
 function resetRound() {
     roundCounter = 1;
     // playButton.textContent = `Play Game`;
-    compRandomList.innerHTML = `?`;
+    compRandomList.innerHTML = `? ? ?`;
 
     rockButtonUser.classList.add(`disable`);
     paperButtonUser.classList.add(`disable`);
@@ -269,6 +270,7 @@ function getcompChoice() {
         // scissorsButtonComp.style.border = `1px solid black`;
         // compRandomList.textContent+= '✊';
         compRandomList.innerHTML += '<span class="comp-span">✊</span>';
+        console.log(compRandomList);
         compRandomList.scrollLeft = compRandomList.scrollWidth; // Scroll to the end
 
         return '✊';
