@@ -30,11 +30,47 @@ const stopButton = document.querySelector(`.button-stop`);
 const roundHistory = document.querySelector(`.round-history`);
 
 
-let compSpeed = 100; //ms
+
+// Retrieve stored stats or initialize them
+let gameStats = JSON.parse(localStorage.getItem("gameStats")) || {
+    userWins: 0,
+    compWins: 0,
+    totalRounds: 0
+};
+
+function updateStats(winner) {
+    gameStats.totalRounds += 1; // Every round played increases
+
+    if (winner === "user") {
+        gameStats.userWins += 1;
+    } else if (winner === "comp") {
+        gameStats.compWins += 1;
+    }
+
+    // Save updated stats to local storage
+    localStorage.setItem("gameStats", JSON.stringify(gameStats));
+
+    // Update display
+    displayStats();
+}
+
+function displayStats() {
+    document.getElementById("totalRounds").textContent = gameStats.totalRounds;
+    document.getElementById("userWins").textContent = gameStats.userWins;
+    document.getElementById("compWins").textContent = gameStats.compWins;
+}
+
+
+
+let compSpeed = 100; // ms
 const baseSpeed = 100; 
 const speedDisplay = document.getElementById("intervalDisplay");
 
-document.getElementById("increaseSpeed").addEventListener("click", () => {
+const increaseBtn = document.getElementById("increaseSpeed");
+const decreaseBtn = document.getElementById("decreaseSpeed");
+const resetBtn = document.getElementById("resetSpeed");
+
+increaseBtn.addEventListener("click", () => {
     if (compSpeed > 100) {
         compSpeed = Math.max(10, compSpeed - 100); // Limit to 10ms minimum
     } else {
@@ -45,7 +81,7 @@ document.getElementById("increaseSpeed").addEventListener("click", () => {
     console.log(`Speed: ${compSpeed}ms`);
 });
 
-document.getElementById("decreaseSpeed").addEventListener("click", () => {
+decreaseBtn.addEventListener("click", () => {
     if (compSpeed >= 100) {
         compSpeed = Math.min(1000, compSpeed + 100); // Limit to 1000ms maximum
     } else {
@@ -56,11 +92,12 @@ document.getElementById("decreaseSpeed").addEventListener("click", () => {
     console.log(`Speed: ${compSpeed}ms`);
 });
 
-document.getElementById("resetSpeed").addEventListener("click", () => {
+resetBtn.addEventListener("click", () => {
     compSpeed = 100; 
     updateSpeedDisplay();
     console.log(`Speed reset: ${compSpeed}ms`);
 });
+
 
 function updateSpeedDisplay() {
     let speedPercentage = baseSpeed / compSpeed; 
@@ -182,7 +219,6 @@ function roundResult() {
         userChoiceDisplay.style.backgroundColor = `#a3c4f3`;
         compChoiceDisplay.style.backgroundColor = '#a3c4f3';
 
-        getRoundHistory();
 
     } else if (
         (userChoice === `rock` && compChoice === `scissors`) ||  // Rock beats Scissors
@@ -194,8 +230,7 @@ function roundResult() {
 
         userChoiceDisplay.style.backgroundColor = `#a7d7a7`;
         compChoiceDisplay.style.backgroundColor = '#f4a3a3';
-
-        getRoundHistory();
+        updateStats("user"); // User wins this round
         // console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nPlayer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
 
 
@@ -204,10 +239,12 @@ function roundResult() {
         scoreComp.textContent = computerScore;
         userChoiceDisplay.style.backgroundColor = `#f4a3a3`;
         compChoiceDisplay.style.backgroundColor = '#a7d7a7';
+        updateStats("comp"); // Computer wins this round
 
-        getRoundHistory();
+
         // console.log(`Player chose ${userChoice}.\nComputer chose ${compChoice}.\nComputer Wins!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
     }
+    getRoundHistory();
 }
 
 
@@ -276,6 +313,7 @@ rockButtonUser.addEventListener('click', () => {
     playButton.classList.remove(`disable`);
     speedControlContainer.classList.remove(`disable`);
     if (roundCounter > Number(roundCount.value)) {
+                stopButton.style.display = 'none'
         showWinner();
     }
 
@@ -298,6 +336,7 @@ paperButtonUser.addEventListener('click', () => {
     speedControlContainer.classList.remove(`disable`);
 
     if (roundCounter > Number(roundCount.value)) {
+                stopButton.style.display = 'none'
         showWinner();
     }
 
@@ -384,3 +423,4 @@ function getRoundHistory() {
 
 
 
+document.addEventListener("DOMContentLoaded", displayStats);
