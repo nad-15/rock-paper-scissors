@@ -19,10 +19,13 @@ const playButton = document.querySelector(`.play-button`);
 const stopButton = document.querySelector(`.button-stop`);
 const roundHistory = document.querySelector(`.round-history`);
 
+const winEmojis = ["😎", "🎉", "🥳", "🔥", "🏆", "💪", "😆", "🤩", "👏", "😁", "🎊", "🤑", "🚀", "🥂", "✨"];
+const loseEmojis = ["😢", "💀", "😖", "😭", "👎", "😞", "🤦", "🤬", "😡", "😩", "😰", "🙃", "🥀", "💔", "💣"];
+
 
 
 let compSpeed = 100; // ms
-const baseSpeed = 100; 
+const baseSpeed = 100;
 const speedDisplay = document.getElementById("intervalDisplay");
 
 const increaseBtn = document.getElementById("increaseSpeed");
@@ -234,7 +237,7 @@ rockButtonUser.addEventListener('click', () => {
     playButton.classList.remove(`disable`);
     speedControlContainer.classList.remove(`disable`);
     if (roundCounter > Number(roundCount.value)) {
-                stopButton.style.display = 'none'
+        stopButton.style.display = 'none'
         showWinner();
     }
 
@@ -257,7 +260,7 @@ paperButtonUser.addEventListener('click', () => {
     speedControlContainer.classList.remove(`disable`);
 
     if (roundCounter > Number(roundCount.value)) {
-                stopButton.style.display = 'none'
+        stopButton.style.display = 'none'
         showWinner();
     }
 
@@ -288,8 +291,12 @@ function showWinner() {
         roundIndicator.textContent = `You Win!!!`;
         userChoiceDisplay.style.backgroundColor = '';
         compChoiceDisplay.style.backgroundColor = '';
-        userChoiceDisplay.textContent = `😂`;
-        compChoiceDisplay.textContent = `😭`;
+        // userChoiceDisplay.textContent = `😂`;
+        // compChoiceDisplay.textContent = `😭`;
+
+        userChoiceDisplay.textContent = winEmojis[Math.floor(Math.random() * winEmojis.length)];
+        compChoiceDisplay.textContent = loseEmojis[Math.floor(Math.random() * loseEmojis.length)];
+
 
     }
     else if (humanScore < computerScore) {
@@ -297,8 +304,12 @@ function showWinner() {
         roundIndicator.textContent = `Computer Wins!!!`;
         userChoiceDisplay.style.backgroundColor = '';
         compChoiceDisplay.style.backgroundColor = '';
-        compChoiceDisplay.textContent = `😂`;
-        userChoiceDisplay.textContent = `😭`;
+        // compChoiceDisplay.textContent = `😂`;
+        // userChoiceDisplay.textContent = `😭`;
+
+        userChoiceDisplay.textContent = loseEmojis[Math.floor(Math.random() * loseEmojis.length)];
+        compChoiceDisplay.textContent = winEmojis[Math.floor(Math.random() * winEmojis.length)];
+
     }
     else {
         console.log(`\nTie`);
@@ -408,14 +419,14 @@ decreaseBtn.addEventListener("click", () => {
 });
 
 resetBtn.addEventListener("click", () => {
-    compSpeed = 100; 
+    compSpeed = 100;
     updateSpeedDisplay();
     console.log(`Speed reset: ${compSpeed}ms`);
 });
 
 
 function updateSpeedDisplay() {
-    let speedPercentage = baseSpeed / compSpeed; 
+    let speedPercentage = baseSpeed / compSpeed;
     speedDisplay.textContent = `x ${speedPercentage.toFixed(2)}`;
 }
 
