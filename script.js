@@ -371,6 +371,7 @@ function updateStats(winner) {
     } else if (winner === "comp") {
         gameStats.compWins += 1;
     } else if (winner === "draw") {
+        gameStats.draw = gameStats.draw || 0; 
         gameStats.draw += 1;
         console.log(gameStats.draw);
     }
