@@ -314,6 +314,10 @@ function showWinner() {
     else {
         console.log(`\nTie`);
         roundIndicator.textContent = `Draw!!!`;
+        userChoiceDisplay.style.backgroundColor = '';
+        compChoiceDisplay.style.backgroundColor = '';
+        userChoiceDisplay.textContent = compChoiceDisplay.textContent = winEmojis[Math.floor(Math.random() * winEmojis.length)];
+        // userChoiceDisplay.textContent = winEmojis[Math.floor(Math.random() * winEmojis.length)];
     }
 
     playButton.textContent = `Reset`;
@@ -371,7 +375,7 @@ function updateStats(winner) {
     } else if (winner === "comp") {
         gameStats.compWins += 1;
     } else if (winner === "draw") {
-        gameStats.draw = gameStats.draw || 0; 
+        gameStats.draw = gameStats.draw || 0;
         gameStats.draw += 1;
         console.log(gameStats.draw);
     }
