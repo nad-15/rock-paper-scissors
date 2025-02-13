@@ -311,6 +311,7 @@ transform: scale(.8) ;
     margin-top: 1rem;
     width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     border: 1px solid gray;
     border-radius: 2px;
@@ -319,7 +320,8 @@ transform: scale(.8) ;
     cursor: grab;
     gap: 2px;
     padding: 0.5rem;
-    scrollbar-width: none; /* Hides scrollbar in Firefox */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */.
+
 }
 
 /* Hide scrollbar for Webkit-based browsers */
