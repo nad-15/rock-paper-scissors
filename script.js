@@ -1,65 +1,23 @@
 // alert('This is a console game. Please open your dev tools and then go to console!');
 const roundIndicator = document.getElementById(`round-indicator`);
-
 const userChoiceDisplay = document.querySelector(`.user-choice-dis`);
 const rockButtonUser = document.getElementById(`rockButtonUser`);
 const paperButtonUser = document.getElementById(`paperButtonUser`);
 const scissorsButtonUser = document.getElementById(`scissorsButtonUser`);
-
 const compChoiceDisplay = document.querySelector(`.comp-choice-dis`);
 const compRandomList = document.querySelector(`.comp-random-list`);
 const rockButtonComp = document.getElementById(`rockButtonComp`);
 const paperButtonComp = document.getElementById(`paperButtonComp`);
 const scissorsButtonComp = document.getElementById(`scissorsButtonComp`);
-
 const roundCountLable = document.querySelector(`.round-count-label`);
 const roundCount = document.querySelector(`.round-count`);
 const roundsContainer = document.querySelector(`.rounds-container`);
-
 const speedControlContainer = document.getElementById(`speedControlContainer`);
-
-console.log(compRandomList);
-
 const scoreUser = document.querySelector(`.score-user`);
 const scoreComp = document.querySelector(`.score-comp`);
-
-
 const playButton = document.querySelector(`.play-button`);
-
 const stopButton = document.querySelector(`.button-stop`);
-
 const roundHistory = document.querySelector(`.round-history`);
-
-
-
-// Retrieve stored stats or initialize them
-let gameStats = JSON.parse(localStorage.getItem("gameStats")) || {
-    userWins: 0,
-    compWins: 0,
-    totalRounds: 0
-};
-
-function updateStats(winner) {
-    gameStats.totalRounds += 1; // Every round played increases
-
-    if (winner === "user") {
-        gameStats.userWins += 1;
-    } else if (winner === "comp") {
-        gameStats.compWins += 1;
-    }
-
-    // Save updated stats to local storage
-    localStorage.setItem("gameStats", JSON.stringify(gameStats));
-
-    // Update display
-    displayStats();
-}
-
-function displayStats() {
-    document.getElementById("totalRounds").textContent = gameStats.totalRounds;
-    document.getElementById("userWins").textContent = gameStats.userWins;
-    document.getElementById("compWins").textContent = gameStats.compWins;
-}
 
 
 
@@ -71,42 +29,8 @@ const increaseBtn = document.getElementById("increaseSpeed");
 const decreaseBtn = document.getElementById("decreaseSpeed");
 const resetBtn = document.getElementById("resetSpeed");
 
-increaseBtn.addEventListener("click", () => {
-    if (compSpeed > 100) {
-        compSpeed = Math.max(10, compSpeed - 100); // Limit to 10ms minimum
-    } else {
-        compSpeed = Math.max(10, compSpeed - 10);
-    }
-
-    updateSpeedDisplay();
-    console.log(`Speed: ${compSpeed}ms`);
-});
-
-decreaseBtn.addEventListener("click", () => {
-    if (compSpeed >= 100) {
-        compSpeed = Math.min(1000, compSpeed + 100); // Limit to 1000ms maximum
-    } else {
-        compSpeed = Math.min(1000, compSpeed + 10);
-    }
-
-    updateSpeedDisplay();
-    console.log(`Speed: ${compSpeed}ms`);
-});
-
-resetBtn.addEventListener("click", () => {
-    compSpeed = 100; 
-    updateSpeedDisplay();
-    console.log(`Speed reset: ${compSpeed}ms`);
-});
-
-
-function updateSpeedDisplay() {
-    let speedPercentage = baseSpeed / compSpeed; 
-    speedDisplay.textContent = `x ${speedPercentage.toFixed(2)}`;
-}
-
-
-
+let humanScore = 0;
+let computerScore = 0;
 
 let interval;
 let compChoice;
@@ -114,10 +38,7 @@ let userChoice;
 let roundCounter = 1;
 
 
-
-let humanScore = 0;
-let computerScore = 0;
-
+//game starts here
 playButton.addEventListener('click', () => {
 
     if (Number(roundCount.value) > 1000 || Number(roundCount.value) < 1) {
@@ -135,6 +56,29 @@ stopButton.addEventListener(`click`, () => {
     resetRound();
 });
 
+
+function startRound() {
+    console.log(`play button click`);
+    if (roundCounter > Number(roundCount.value)) {
+        resetRound();
+    } else {
+
+        //optimize by removing repitition
+        rockButtonUser.classList.remove(`disable`);
+        paperButtonUser.classList.remove(`disable`);
+        scissorsButtonUser.classList.remove(`disable`);
+        playButton.classList.add(`disable`);
+        speedControlContainer.classList.add(`disable`);
+        playButton.textContent = `Next Round`;
+        roundsContainer.style.display = 'none';
+        roundIndicator.style.display = 'flex';
+        roundIndicator.textContent = `Round ${roundCounter} of ${parseInt(roundCount.value)}`;
+        userChoiceDisplay.textContent = `?`;
+        userChoiceDisplay.style.backgroundColor = ``;
+        compChoiceDisplay.style.backgroundColor = '';
+        startRandomCompChoice();
+    }
+}
 
 
 
@@ -172,33 +116,6 @@ function resetRound() {
     stopButton.style.display = 'none'
 }
 
-function startRound() {
-
-    if (roundCounter > Number(roundCount.value)) {
-
-        resetRound();
-    } else {
-        rockButtonUser.classList.remove(`disable`);
-        paperButtonUser.classList.remove(`disable`);
-        scissorsButtonUser.classList.remove(`disable`);
-        playButton.classList.add(`disable`);
-        speedControlContainer.classList.add(`disable`);
-
-
-        console.log(`play button click`);
-        playButton.textContent = `Next Round`;
-        roundsContainer.style.display = 'none';
-        roundIndicator.style.display = 'flex';
-        roundIndicator.textContent = `Round ${roundCounter} of ${parseInt(roundCount.value)}`;
-        userChoiceDisplay.textContent = `?`;
-        userChoiceDisplay.style.backgroundColor = ``;
-        compChoiceDisplay.style.backgroundColor = '';
-        startRandomCompChoice();
-    }
-}
-
-
-
 
 // if (humanScore > computerScore) console.log(`\nYou Win!!!`);
 // else if (humanScore < computerScore) console.log(`\nComputer Wins!!!`);
@@ -219,6 +136,7 @@ function roundResult() {
         console.log(`Both chose ${userChoice}.\nTie!` + `\n\nScore:\n` + `Player: ${humanScore} | Computer: ${computerScore}`);
         userChoiceDisplay.style.backgroundColor = `#a3c4f3`;
         compChoiceDisplay.style.backgroundColor = '#a3c4f3';
+        updateStats("draw"); // Computer wins this round
 
 
     } else if (
@@ -261,6 +179,13 @@ function roundResult() {
 //     }
 
 
+function startRandomCompChoice() {
+    interval = setInterval(() => {
+        compChoiceDisplay.textContent = getcompChoice();
+    }, compSpeed); // let user choose speed
+
+}
+
 function getcompChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     compChoice = choices[(Math.floor(Math.random() * 3))];
@@ -296,12 +221,6 @@ function getcompChoice() {
     // return compChoice.toLowerCase();  
 }
 
-function startRandomCompChoice() {
-    interval = setInterval(() => {
-        compChoiceDisplay.textContent = getcompChoice();
-    }, compSpeed); // let user choose speed
-
-}
 
 rockButtonUser.addEventListener('click', () => {
     clearInterval(interval);
@@ -383,7 +302,7 @@ function showWinner() {
     }
     else {
         console.log(`\nTie`);
-        roundIndicator.textContent = `It is a Tie!!!`;
+        roundIndicator.textContent = `Draw!!!`;
     }
 
     playButton.textContent = `Reset`;
@@ -393,8 +312,6 @@ function showWinner() {
 
 
 function getRoundHistory() {
-
-
     const roundNumber = document.createElement(`div`);
     roundNumber.classList.add(`round-number`);
     const userChoiceHistory = document.createElement('div');
@@ -418,11 +335,86 @@ function getRoundHistory() {
 
     roundHistory.appendChild(roundResultHistory);
     roundHistory.scrollLeft = roundHistory.scrollWidth;
-
-
 }
 
 
 
-
+//access local storage saved game stats
 document.addEventListener("DOMContentLoaded", displayStats);
+
+
+// Retrieve stored stats or initialize them
+let gameStats = JSON.parse(localStorage.getItem("gameStats")) || {
+    userWins: 0,
+    compWins: 0,
+    draw: 0,
+    totalRounds: 0
+
+};
+
+function updateStats(winner) {
+    gameStats.totalRounds += 1; // Every round played increases
+
+    if (winner === "user") {
+        gameStats.userWins += 1;
+    } else if (winner === "comp") {
+        gameStats.compWins += 1;
+    } else if (winner === "draw") {
+        gameStats.draw += 1;
+        console.log(gameStats.draw);
+    }
+
+    // Save updated stats to local storage
+    localStorage.setItem("gameStats", JSON.stringify(gameStats));
+
+    // Update display
+    displayStats();
+}
+
+function displayStats() {
+    // document.getElementById("totalRounds").textContent = gameStats.totalRounds;
+    document.getElementById("userWins").textContent = gameStats.userWins;
+    document.getElementById(`userLose`).textContent = gameStats.compWins;
+    document.getElementById(`userDraw`).textContent = gameStats.draw;
+
+    document.getElementById("compWins").textContent = gameStats.compWins;
+    document.getElementById(`compLose`).textContent = gameStats.userWins;
+    document.getElementById(`compDraw`).textContent = gameStats.draw;
+}
+
+
+//computer speed modifiers
+
+increaseBtn.addEventListener("click", () => {
+    if (compSpeed > 100) {
+        compSpeed = Math.max(10, compSpeed - 100); // Limit to 10ms minimum
+    } else {
+        compSpeed = Math.max(10, compSpeed - 10);
+    }
+
+    updateSpeedDisplay();
+    console.log(`Speed: ${compSpeed}ms`);
+});
+
+decreaseBtn.addEventListener("click", () => {
+    if (compSpeed >= 100) {
+        compSpeed = Math.min(1000, compSpeed + 100); // Limit to 1000ms maximum
+    } else {
+        compSpeed = Math.min(1000, compSpeed + 10);
+    }
+
+    updateSpeedDisplay();
+    console.log(`Speed: ${compSpeed}ms`);
+});
+
+resetBtn.addEventListener("click", () => {
+    compSpeed = 100; 
+    updateSpeedDisplay();
+    console.log(`Speed reset: ${compSpeed}ms`);
+});
+
+
+function updateSpeedDisplay() {
+    let speedPercentage = baseSpeed / compSpeed; 
+    speedDisplay.textContent = `x ${speedPercentage.toFixed(2)}`;
+}
