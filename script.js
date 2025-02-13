@@ -418,3 +418,35 @@ function updateSpeedDisplay() {
     let speedPercentage = baseSpeed / compSpeed; 
     speedDisplay.textContent = `x ${speedPercentage.toFixed(2)}`;
 }
+
+
+
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+compRandomList.addEventListener("mousedown", (e) => {
+    isDown = true;
+    compRandomList.classList.add("active");
+    startX = e.pageX - compRandomList.offsetLeft;
+    scrollLeft = compRandomList.scrollLeft;
+});
+
+compRandomList.addEventListener("mouseleave", () => {
+    isDown = false;
+    compRandomList.classList.remove("active");
+});
+
+compRandomList.addEventListener("mouseup", () => {
+    isDown = false;
+    compRandomList.classList.remove("active");
+});
+
+compRandomList.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - compRandomList.offsetLeft;
+    const walk = (x - startX) * 2; // Multiply to adjust speed
+    compRandomList.scrollLeft = scrollLeft - walk;
+});
