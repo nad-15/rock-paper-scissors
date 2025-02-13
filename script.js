@@ -450,3 +450,31 @@ compRandomList.addEventListener("mousemove", (e) => {
     const walk = (x - startX) * 2; // Multiply to adjust speed
     compRandomList.scrollLeft = scrollLeft - walk;
 });
+
+
+
+
+roundHistory.addEventListener("mousedown", (e) => {
+    isDown = true;
+    roundHistory.classList.add("active");
+    startX = e.pageX - roundHistory.offsetLeft;
+    scrollLeft = roundHistory.scrollLeft;
+});
+
+roundHistory.addEventListener("mouseleave", () => {
+    isDown = false;
+    roundHistory.classList.remove("active");
+});
+
+roundHistory.addEventListener("mouseup", () => {
+    isDown = false;
+    roundHistory.classList.remove("active");
+});
+
+roundHistory.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - roundHistory.offsetLeft;
+    const walk = (x - startX) * 2; // Multiply to adjust speed
+    roundHistory.scrollLeft = scrollLeft - walk;
+});
